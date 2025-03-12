@@ -34,6 +34,7 @@ function Game() {
     winner === "draw" ? "Draw!" : winner ? `${winner} Wins!` : "";
 
   const jumpTo = (index: number) => {
+    if (index >= history.length) return;
     setHistory((prev) => prev.slice(0, index + 1));
     setSquares(history[index]);
     setXIsNext(index % 2 === 0);
