@@ -1,13 +1,17 @@
 import { css } from "@emotion/react";
 import Square from "./Square";
 import { useState } from "react";
+import { PlayerType } from "./type";
 
+// TODO: 왜 null값이 들어갔는데 에러가 없지?
 function Board() {
-  const [squares, setSquares] = useState(Array(9).fill(null));
+  const [squares, setSquares] = useState<Array<PlayerType>>(
+    Array(9).fill("empty")
+  );
 
   const handleClick = (index: number) => {
     const nextSquares = squares.slice();
-    nextSquares[index] = "X";
+    nextSquares[index] = "player1";
     setSquares(nextSquares);
   };
   return (

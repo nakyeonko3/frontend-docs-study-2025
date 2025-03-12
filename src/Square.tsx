@@ -1,15 +1,21 @@
 import { css } from "@emotion/react";
+import { PlayerType } from "./type";
 
-function Square({
-  value,
-  onSquareClick,
-}: {
-  value: string;
+interface SquareProps {
+  value: PlayerType;
   onSquareClick: () => void;
-}) {
+}
+
+function Square({ value, onSquareClick }: SquareProps) {
+  const displayValue: Record<PlayerType, string> = {
+    empty: "",
+    player1: "X",
+    player2: "O",
+  };
+
   return (
     <button css={squareStyle} onClick={onSquareClick}>
-      {value}
+      {displayValue[value]}
     </button>
   );
 }
