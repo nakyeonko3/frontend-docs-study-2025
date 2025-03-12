@@ -32,12 +32,12 @@ function Board() {
 }
 
 const boardStyle = css`
-  /* display: flex;
+  display: flex;
   flex-direction: column;
   .board-row {
     display: flex;
     flex-direction: row;
-  } */
+  }
 `;
 
 export default Board;
