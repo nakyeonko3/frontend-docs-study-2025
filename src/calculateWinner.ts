@@ -26,6 +26,5 @@ export function calculateWinner(board: Array<PlayerType>) {
   if (flatBoard.every((cell) => cell)) return "draw";
   return false;
 }
-// TODO: 여기서 false가 아니라 "noWinner"를 리턴하는게 더 좋을까? 고민해보기
 
 export default calculateWinner;
