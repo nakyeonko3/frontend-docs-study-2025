@@ -48,7 +48,7 @@ function Game() {
   };
 
   return (
-    <div css={boardStyle}>
+    <div css={GameStyle}>
       <div css={winnerMessageStyle(winner)}>
         <div>{winnerMessage}</div>
         <button onClick={resetGame}> Play Again! </button>
@@ -59,7 +59,7 @@ function Game() {
   );
 }
 
-const boardStyle = css`
+const GameStyle = css`
   position: absolute;
   top: 50%;
   left: 50%;
