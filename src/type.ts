@@ -1,1 +1,1 @@
-export type PlayerType = "empty" | "player1" | "player2";
+export type PlayerType = "" | "player1" | "player2";

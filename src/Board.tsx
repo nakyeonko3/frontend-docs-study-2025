@@ -2,18 +2,31 @@ import { css } from "@emotion/react";
 import Square from "./Square";
 import { useState } from "react";
 import { PlayerType } from "./type";
+import calculateWinner from "./calculateWinner";
 
-// TODO: 왜 null값이 들어갔는데 에러가 없지?
 function Board() {
-  const [squares, setSquares] = useState<Array<PlayerType>>(
-    Array(9).fill("empty")
-  );
+  const [xIsNext, setXIsNext] = useState<boolean>(true);
+  const [squares, setSquares] = useState<Array<PlayerType>>(Array(9).fill(""));
+  const [winner, setWinner] = useState<PlayerType | "draw" | null>(null);
 
   const handleClick = (index: number) => {
     const nextSquares = squares.slice();
-    nextSquares[index] = "player1";
+    if (xIsNext) {
+      nextSquares[index] = "player1";
+    } else {
+      nextSquares[index] = "player2";
+    }
+    const winner = calculateWinner(nextSquares);
+    if (winner) {
+      setWinner(winner);
+    }
+    setXIsNext((next) => !next);
     setSquares(nextSquares);
   };
+
+  const winnerMessage =
+    winner === "draw" ? "Draw!" : winner ? `${winner} wins!` : "";
+
   return (
     <div css={boardStyle}>
       <div className="board-row">
@@ -31,6 +44,7 @@ function Board() {
         <Square value={squares[7]} onSquareClick={() => handleClick(7)} />
         <Square value={squares[8]} onSquareClick={() => handleClick(8)} />
       </div>
+      <div>{winnerMessage}</div>
     </div>
   );
 }

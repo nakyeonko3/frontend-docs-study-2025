@@ -8,7 +8,7 @@ interface SquareProps {
 
 function Square({ value, onSquareClick }: SquareProps) {
   const displayValue: Record<PlayerType, string> = {
-    empty: "",
+    "": "",
     player1: "X",
     player2: "O",
   };
