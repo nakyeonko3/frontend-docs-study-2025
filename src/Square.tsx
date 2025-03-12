@@ -21,10 +21,10 @@ function Square({ value, onSquareClick }: SquareProps) {
 }
 
 const squareStyle = css`
-  font-size: 24px;
+  font-size: 2.5rem;
   font-weight: bold;
-  height: 50px;
-  width: 50px;
+  height: 4rem;
+  width: 4rem;
   background-color: #1a1a1a;
   border-radius: 5px;
   border: 1px solid #999;
