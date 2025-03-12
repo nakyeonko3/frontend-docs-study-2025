@@ -1,24 +1,30 @@
 import { css } from "@emotion/react";
+import { PlayerType } from "./type";
 
-function Square({
-  value,
-  onSquareClick,
-}: {
-  value: string;
+interface SquareProps {
+  value: PlayerType;
   onSquareClick: () => void;
-}) {
+}
+
+function Square({ value, onSquareClick }: SquareProps) {
+  const displayValue: Record<PlayerType, string> = {
+    "": "",
+    player1: "X",
+    player2: "O",
+  };
+
   return (
     <button css={squareStyle} onClick={onSquareClick}>
-      {value}
+      {displayValue[value]}
     </button>
   );
 }
 
 const squareStyle = css`
-  font-size: 24px;
+  font-size: 2.5rem;
   font-weight: bold;
-  height: 50px;
-  width: 50px;
+  height: 4rem;
+  width: 4rem;
   background-color: #1a1a1a;
   border-radius: 5px;
   border: 1px solid #999;

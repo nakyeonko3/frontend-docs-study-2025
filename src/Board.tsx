@@ -1,17 +1,15 @@
 import { css } from "@emotion/react";
 import Square from "./Square";
-import { useState } from "react";
+import { PlayerType } from "./type";
 
-function Board() {
-  const [squares, setSquares] = useState(Array(9).fill(null));
+interface BoardProps {
+  squares: Array<PlayerType>;
+  handleClick: (index: number) => void;
+}
 
-  const handleClick = (index: number) => {
-    const nextSquares = squares.slice();
-    nextSquares[index] = "X";
-    setSquares(nextSquares);
-  };
+function Board({ squares, handleClick }: BoardProps) {
   return (
-    <div css={boardStyle}>
+    <div className="board" css={boardStyle}>
       <div className="board-row">
         <Square value={squares[0]} onSquareClick={() => handleClick(0)} />
         <Square value={squares[1]} onSquareClick={() => handleClick(1)} />
@@ -32,8 +30,7 @@ function Board() {
 }
 
 const boardStyle = css`
-  display: flex;
-  flex-direction: column;
+  margin-top: 15px;
   .board-row {
     display: flex;
     flex-direction: row;
