@@ -51,46 +51,47 @@ function Game() {
   const currentTurn = xIsNext ? "X's Turn" : "O's Turn";
 
   return (
-    <>
-      <div css={GameStyle}>
-        <div css={winnerMessageStyle(winner)}>
-          <div>{winnerMessage}</div>
-          <button onClick={resetGame}> Play Again! </button>
-        </div>
-        <div>
-          <div css={turnStyle(xIsNext)}>{currentTurn}</div>
-          <Board squares={squares} handleClick={handleClick} />
-        </div>
+    <div
+      css={css`
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+      `}
+    >
+      <div css={winnerMessageStyle(winner)}>
+        <div>{winnerMessage}</div>
+        <button onClick={resetGame}> Play Again! </button>
+      </div>
+      <div css={turnMessageStyle}>{currentTurn}</div>
+      <div css={gameContainerStyle}>
+        <Board squares={squares} handleClick={handleClick} />
         <MoveHistory history={history} jumpTo={jumpTo} />
       </div>
-    </>
+    </div>
   );
 }
 
-const turnStyle = (xIsNext: boolean) => css`
+const turnMessageStyle = css`
   font-weight: bold;
   font-size: 1.5rem;
   white-space: nowrap;
   display: flex;
   flex-direction: column;
   align-items: center;
-  color: ${xIsNext ? "#ff69b4" : "#6495ed"};
 `;
 
-const GameStyle = css`
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+const gameContainerStyle = css`
   display: flex;
   flex-direction: row;
 `;
 
 const winnerMessageStyle = (winner: PlayerType | "draw" | null) => css`
   position: absolute;
-  top: -50%;
+  top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translate(-50%, -200%);
   font-weight: bold;
   font-size: 4.5rem;
   z-index: 1000;
