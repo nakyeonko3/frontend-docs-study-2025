@@ -17,7 +17,9 @@ function Game() {
 
     if (xIsNext) {
       nextSquares[index] = "X";
+      nextSquares[index] = "X";
     } else {
+      nextSquares[index] = "O";
       nextSquares[index] = "O";
     }
 
@@ -47,6 +49,8 @@ function Game() {
     setXIsNext(true);
     setWinner(null);
   };
+
+  const currentTurn = xIsNext ? "X's Turn" : "O's Turn";
 
   const currentTurn = xIsNext ? "X's Turn" : "O's Turn";
 
@@ -99,6 +103,7 @@ const winnerMessageStyle = (winner: PlayerType | "draw" | null) => css`
   display: flex;
   flex-direction: column;
   align-items: center;
+  color: ${winner === "X" ? "#ff69b4" : winner === "O" ? "#6495ed" : "#fff"};
   color: ${winner === "X" ? "#ff69b4" : winner === "O" ? "#6495ed" : "#fff"};
 
   button {
