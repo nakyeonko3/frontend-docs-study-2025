@@ -14,13 +14,13 @@ function Square({ value, onSquareClick }: SquareProps) {
   };
 
   return (
-    <button css={squareStyle(value)} onClick={onSquareClick}>
+    <button css={squareStyle} onClick={onSquareClick}>
       {displayValue[value]}
     </button>
   );
 }
 
-const squareStyle = (value: PlayerType) => css`
+const squareStyle = css`
   font-size: 2.5rem;
   font-weight: bold;
   height: 4rem;
@@ -30,7 +30,6 @@ const squareStyle = (value: PlayerType) => css`
   border: 1px solid #999;
   margin: 3px;
   cursor: pointer;
-  color: ${value === "X" ? "#ff69b4" : "#6495ed"};
 
   &:hover {
     background-color: #333;

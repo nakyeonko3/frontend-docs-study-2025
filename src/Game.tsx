@@ -52,8 +52,6 @@ function Game() {
 
   const currentTurn = xIsNext ? "X's Turn" : "O's Turn";
 
-  const currentTurn = xIsNext ? "X's Turn" : "O's Turn";
-
   return (
     <div
       css={css`
@@ -103,8 +101,6 @@ const winnerMessageStyle = (winner: PlayerType | "draw" | null) => css`
   display: flex;
   flex-direction: column;
   align-items: center;
-  color: ${winner === "X" ? "#ff69b4" : winner === "O" ? "#6495ed" : "#fff"};
-  color: ${winner === "X" ? "#ff69b4" : winner === "O" ? "#6495ed" : "#fff"};
 
   button {
     opacity: ${winner ? 1 : 0};
