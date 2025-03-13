@@ -16,9 +16,9 @@ function Game() {
     const nextSquares = [...squares];
 
     if (xIsNext) {
-      nextSquares[index] = "player1";
+      nextSquares[index] = "X";
     } else {
-      nextSquares[index] = "player2";
+      nextSquares[index] = "O";
     }
 
     const gameWinner = calculateWinner(nextSquares);
@@ -48,17 +48,34 @@ function Game() {
     setWinner(null);
   };
 
+  const currentTurn = xIsNext ? "X's Turn" : "O's Turn";
+
   return (
-    <div css={GameStyle}>
-      <div css={winnerMessageStyle(winner)}>
-        <div>{winnerMessage}</div>
-        <button onClick={resetGame}> Play Again! </button>
+    <>
+      <div css={GameStyle}>
+        <div css={winnerMessageStyle(winner)}>
+          <div>{winnerMessage}</div>
+          <button onClick={resetGame}> Play Again! </button>
+        </div>
+        <div>
+          <div css={turnStyle(xIsNext)}>{currentTurn}</div>
+          <Board squares={squares} handleClick={handleClick} />
+        </div>
+        <MoveHistory history={history} jumpTo={jumpTo} />
       </div>
-      <Board squares={squares} handleClick={handleClick} />
-      <MoveHistory history={history} jumpTo={jumpTo} />
-    </div>
+    </>
   );
 }
+
+const turnStyle = (xIsNext: boolean) => css`
+  font-weight: bold;
+  font-size: 1.5rem;
+  white-space: nowrap;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: ${xIsNext ? "#ff69b4" : "#6495ed"};
+`;
 
 const GameStyle = css`
   position: absolute;
@@ -81,11 +98,7 @@ const winnerMessageStyle = (winner: PlayerType | "draw" | null) => css`
   display: flex;
   flex-direction: column;
   align-items: center;
-  color: ${winner === "player1"
-    ? "#ff69b4"
-    : winner === "player2"
-    ? "#6495ed"
-    : "#fff"};
+  color: ${winner === "X" ? "#ff69b4" : winner === "O" ? "#6495ed" : "#fff"};
 
   button {
     opacity: ${winner ? 1 : 0};

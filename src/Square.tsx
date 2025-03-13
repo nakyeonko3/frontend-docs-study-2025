@@ -9,18 +9,18 @@ interface SquareProps {
 function Square({ value, onSquareClick }: SquareProps) {
   const displayValue: Record<PlayerType, string> = {
     "": "",
-    player1: "X",
-    player2: "O",
+    X: "X",
+    O: "O",
   };
 
   return (
-    <button css={squareStyle} onClick={onSquareClick}>
+    <button css={squareStyle(value)} onClick={onSquareClick}>
       {displayValue[value]}
     </button>
   );
 }
 
-const squareStyle = css`
+const squareStyle = (value: PlayerType) => css`
   font-size: 2.5rem;
   font-weight: bold;
   height: 4rem;
@@ -30,12 +30,13 @@ const squareStyle = css`
   border: 1px solid #999;
   margin: 3px;
   cursor: pointer;
+  color: ${value === "X" ? "#ff69b4" : "#6495ed"};
 
   &:hover {
-    background-color: #646cff;
+    background-color: #333;
   }
   &:active {
-    background-color: #646cff;
+    background-color: #333;
   }
 `;
 
