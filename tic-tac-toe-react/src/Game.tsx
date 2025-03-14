@@ -1,7 +1,7 @@
 import { css } from "@emotion/react";
 import { useState } from "react";
 import { PlayerType } from "./type";
-import calculateWinner from "./calculateWinner";
+import { calculateWinner } from "./calculateWinner";
 import Board from "./Board";
 import MoveHistory from "./MoveHistory";
 
@@ -17,14 +17,12 @@ function Game() {
 
     if (xIsNext) {
       nextSquares[index] = "X";
-      nextSquares[index] = "X";
     } else {
-      nextSquares[index] = "O";
       nextSquares[index] = "O";
     }
 
-    const gameWinner = calculateWinner(nextSquares);
-    if (gameWinner === "draw" || gameWinner) {
+    const { winner: gameWinner } = calculateWinner(nextSquares);
+    if (gameWinner) {
       setWinner(gameWinner);
     }
     setXIsNext((next) => !next);
@@ -66,7 +64,7 @@ function Game() {
         <div>{winnerMessage}</div>
         <button onClick={resetGame}> Play Again! </button>
       </div>
-      <div css={turnMessageStyle}>{currentTurn}</div>
+      <div css={turnMessageStyle(winner)}>{currentTurn}</div>
       <div css={gameContainerStyle}>
         <Board squares={squares} handleClick={handleClick} />
         <MoveHistory history={history} jumpTo={jumpTo} />
@@ -75,13 +73,14 @@ function Game() {
   );
 }
 
-const turnMessageStyle = css`
+const turnMessageStyle = (winner: PlayerType | "draw" | null) => css`
   font-weight: bold;
   font-size: 1.5rem;
   white-space: nowrap;
   display: flex;
   flex-direction: column;
   align-items: center;
+  opacity: ${winner ? 0 : 1};
 `;
 
 const gameContainerStyle = css`

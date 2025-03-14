@@ -30,6 +30,7 @@ const squareStyle = css`
   border: 1px solid #999;
   margin: 3px;
   cursor: pointer;
+  caret-color: transparent;
 
   &:hover {
     background-color: #333;

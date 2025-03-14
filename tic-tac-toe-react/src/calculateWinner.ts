@@ -1,6 +1,12 @@
 import { PlayerType } from "./type";
 
-export function calculateWinner(board: Array<PlayerType>) {
+export interface CalculateWinnerReturn {
+  winner: PlayerType | "draw" | null;
+}
+
+export function calculateWinner(
+  board: Array<PlayerType>
+): CalculateWinnerReturn {
   const flatBoard = board.flat();
 
   const winnerLines = [
@@ -19,12 +25,10 @@ export function calculateWinner(board: Array<PlayerType>) {
       flatBoard[a] === flatBoard[b] &&
       flatBoard[a] === flatBoard[c]
     ) {
-      return flatBoard[a];
+      return { winner: flatBoard[a] };
     }
   }
 
-  if (flatBoard.every((cell) => cell)) return "draw";
-  return false;
+  if (flatBoard.every((cell) => cell)) return { winner: "draw" };
+  return { winner: null };
 }
-
-export default calculateWinner;
