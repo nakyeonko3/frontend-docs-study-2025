@@ -4,7 +4,7 @@ This is the starter template for the Next.js App Router Course. It contains the 
 
 For more information, see the [course curriculum](https://nextjs.org/learn) on the Next.js Website.
 
-# 메모
+# chap 03: Fonts and Images
 
 ## 폰트 최적화
 - 빌드 타임 최적화: 폰트를 빌드 타임에 다운로드하여 다른 정적 자산들(js,html,css, image, 등)과 함께 호스팅함.
@@ -18,3 +18,29 @@ For more information, see the [course curriculum](https://nextjs.org/learn) on t
 - 뷰포트에 맞케 크기를 잘라서 보내기
 - WebP 또는 AVIF로 이미지를 바꾸기
 - 이미지 로드시 레이아웃 이동 방지
+
+
+# chap 4: Creating Layouts and Pages
+
+## Nested routing
+- 파일 시스템 구조에 맞춰서 라우팅이 진행된다.
+- 폴더명이 URL 세그먼트가 된다.  
+
+## partial rendering
+- 다른 페이지 이동시 페이지 레이아웃 컴포넌트(layout.tsx)는 다시 랜더링되지 않고 일부분만 랜더링된다.
+- dashboard 폴더 하위의 모든 페이지 컴포넌트가 같은 layout.tsx 컴포넌트를 공유하게된다.
+- Root Layout: `app/layout.tsx` 는 모든 페이지에서 공유하는 루트 레이아웃이 된다.
+
+```
+app/
+├── dashboard/
+│   ├── page.tsx        
+│   └── invoices/
+│       └── page.tsx  
+```
+
+# chap 5: Navigating Between Pages
+
+## The <Link> component
+- `a` 태그를 사용하게 해당 링크 클릭시 해당 전체 페이지가 다시 재랜더링
+- 
