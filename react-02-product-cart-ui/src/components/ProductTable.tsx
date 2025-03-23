@@ -5,13 +5,25 @@ import { ProductRow } from "./ProductRow";
 
 interface ProductTableProps {
   products: Product[];
+  filterText: string;
+  inStockOnly: boolean;
 }
 
-export function ProductTable({ products }: ProductTableProps) {
+export function ProductTable({
+  products,
+  filterText,
+  inStockOnly,
+}: ProductTableProps) {
   const rows: JSX.Element[] = [];
   let lastCategory: string | null = null;
 
   products.forEach((product) => {
+    if (product.name.toLowerCase().indexOf(filterText.toLowerCase()) === -1) {
+      return;
+    }
+    if (inStockOnly && !product.stocked) {
+      return;
+    }
     if (product.category !== lastCategory) {
       rows.push(
         <ProductCategoryRow

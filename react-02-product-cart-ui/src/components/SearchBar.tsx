@@ -1,9 +1,14 @@
-export function SearchBar() {
+interface SearchBarProps {
+  filterText: string;
+  inStockOnly: boolean;
+}
+export function SearchBar({ filterText, inStockOnly }: SearchBarProps) {
   return (
     <form>
-      <input type="text" placeholder="Search..." />
+      <input type="text" value={filterText} placeholder="Search..." />
       <label>
-        <input type="checkbox" /> Only show products in stock
+        <input type="checkbox" checked={inStockOnly} /> Only show products in
+        stock
       </label>
     </form>
   );
