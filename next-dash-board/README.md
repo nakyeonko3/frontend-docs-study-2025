@@ -23,13 +23,13 @@ For more information, see the [course curriculum](https://nextjs.org/learn) on t
 # chap 4: Creating Layouts and Pages
 
 ## Nested routing
-- 파일 시스템 구조에 맞춰서 라우팅이 진행된다.
-- 폴더명이 URL 세그먼트가 된다.  
+- 파일 시스템 구조에 맞춰서 라우팅이 진행됨.
+- 폴더명이 URL 세그먼트가 됨.  
 
 ## partial rendering
-- 다른 페이지 이동시 페이지 레이아웃 컴포넌트(layout.tsx)는 다시 랜더링되지 않고 일부분만 랜더링된다.
-- dashboard 폴더 하위의 모든 페이지 컴포넌트가 같은 layout.tsx 컴포넌트를 공유하게된다.
-- Root Layout: `app/layout.tsx` 는 모든 페이지에서 공유하는 루트 레이아웃이 된다.
+- 다른 페이지 이동시 페이지 레이아웃 컴포넌트(layout.tsx)는 다시 랜더링되지 않고 일부분만 랜더링됨
+- dashboard 폴더 하위의 모든 페이지 컴포넌트가 같은 layout.tsx 컴포넌트를 공유하게됨
+- Root Layout: `app/layout.tsx` 는 모든 페이지에서 공유하는 루트 레이아웃이 됨.
 
 ```
 app/
@@ -43,4 +43,4 @@ app/
 
 ## The <Link> component
 - `a` 태그를 사용하게 해당 링크 클릭시 해당 전체 페이지가 다시 재랜더링
-- 
+- 사용자가 링크를 클릭 할 때까지 대상 페이지의 코드가 백그라운드에서 로드됨(prefetch)
