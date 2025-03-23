@@ -44,3 +44,14 @@ app/
 ## The <Link> component
 - `a` 태그를 사용하게 해당 링크 클릭시 해당 전체 페이지가 다시 재랜더링
 - 사용자가 링크를 클릭 할 때까지 대상 페이지의 코드가 백그라운드에서 로드됨(prefetch)
+	- 해당 페이지에서 뷰포트에 Link 태그가 보이게 되면 해당 경로의 컴포넌트를 prefetch를 통해 미리 가져오게됨.
+
+### How are Client Components rendered?
+
+[how-are-client-components-rendered](https://nextjs.org/docs/app/building-your-application/rendering/client-components#how-are-client-components-rendered)
+
+1. 서버 컴포넌트(Server Component)를 RSC Payload라는 특수 데이터 형식으로 렌더링
+2. **RSC Payload와 클라이언트 컴포넌트(Client Component)를 HTML로 렌더링**
+	- `use client`를 명시한 클라이언트 컴포넌트의 초기 HTML도 서버에서 렌더링됨.
+3. 브라우저는 서버에서 받은 HTML를 초기 페이지를 렌더링함
+4. 이후 클라이언트 컴포넌트에 hydrate를 통해 JavaScript가 주입됨.
