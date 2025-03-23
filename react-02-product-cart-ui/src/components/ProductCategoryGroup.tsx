@@ -12,8 +12,11 @@ export function ProductCategoryGroup({
   return (
     <>
       <ProductCategoryRow category={category} />
-      {products.map((product) => (
-        <ProductRow product={product} key={`ProuctRow-${product.name}`} />
+      {products.map((product, index) => (
+        <ProductRow
+          product={product}
+          key={`ProductRow-${index}-${product.name}`}
+        />
       ))}
     </>
   );
