@@ -12,6 +12,8 @@ export function FilterableProductTable({
 }: FilterableProductTableProps) {
   const [filterText, setFilterText] = useState("");
   const [inStockOnly, setInStockOnly] = useState(false);
+  const [somthingText, setSomthingText] = useState("");
+
   return (
     <div>
       <SearchBar
@@ -20,6 +22,11 @@ export function FilterableProductTable({
         onFilterTextChange={setFilterText}
         onInStockOnlyChange={setInStockOnly}
       />
+      <input
+        value={somthingText}
+        onChange={(e) => setSomthingText(e.target.value)}
+        placeholder="say something!"
+      ></input>
       <ProductTable
         products={products}
         filterText={filterText}
