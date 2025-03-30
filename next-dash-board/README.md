@@ -55,3 +55,54 @@ app/
 	- `use client`를 명시한 클라이언트 컴포넌트의 초기 HTML도 서버에서 렌더링됨.
 3. 브라우저는 서버에서 받은 HTML를 초기 페이지를 렌더링함
 4. 이후 클라이언트 컴포넌트에 hydrate를 통해 JavaScript가 주입됨.
+
+
+# chap 6: Setting Up Your Database
+
+
+# chap 7: Fetching Data
+
+## Choosing how to fetch data 
+- API layer 
+	- 서드파티 서비스 API 사용시 유용
+- Database queries
+	- API 엔드 포인트 없이 데이터베이스에 직접 접근하여 데이터를 가져올 수 있음.
+	- 서버 컴포넌트에서 데이터베이스에 접근하기 때문에 데이터베이스 보안 정보가 클라이언트에서 노출되지 않음.
+
+
+## Using Server Components to fetch data 서버 컴포넌트를 사용하여 데이터를 가져올 때의 장점
+- 추가 API 계층없이 데이터베이스를 직접 쿼리하게 되서 작성하고 유지관리해야 될 코드가 감소함.
+- 비용이 많이 드는 데이터 가져오기와 로직을 서버에서 처리하고 결과만 클라이언트로 전송할 수 있음.
+
+## What are request waterfalls?
+- 한 요청(fetch)가 완료된 후에만 다음 요청이 시작됨
+- 특정 요청은 이전 요청이 완료된 이후에 진행되어야만 하는 경우가 존재함.
+	- ex) 사용자 ID 값을 요청한 다음에 해당 사용자 ID로 사용자 프로필 데이터를 요청해야 되는 경우
+
+### Parallel data fetching
+- 모든 데이터 가져오기를 동시에 시작하여 총 시간 단축시킬 수 있는 방법
+- Promise.all() 또는 Promise.allSettled()를 사용함.
+
+```tsx
+  // const latestInvoices = await fetchLatestInvoices();
+  // const revenue = await fetchRevenue();
+  // const {
+  //   totalPaidInvoices,
+  //   totalPendingInvoices,
+  //   numberOfCustomers,
+  //   numberOfInvoices,
+  // } = await fetchCardData();
+
+  const [latestInvoices, revenue, cardData] = await Promise.all([
+    fetchLatestInvoices(),
+    fetchRevenue(),
+    fetchCardData(),
+  ]);
+
+  const {
+    totalPaidInvoices,
+    totalPendingInvoices,
+    numberOfCustomers,
+    numberOfInvoices,
+  } = cardData;
+```
