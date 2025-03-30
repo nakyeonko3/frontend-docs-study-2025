@@ -1,5 +1,5 @@
-import { Product } from "../types/Product";
 import { useProductFiltering } from "../hooks/useProductFiltering";
+import { Product } from "../types/Product";
 import { ProductCategoryGroup } from "./ProductCategoryGroup";
 
 interface ProductTableProps {
@@ -18,6 +18,12 @@ export function ProductTable({
     filterText,
     inStockOnly
   );
+
+  const hasFilteredProducts = Object.keys(productsByCategory).length > 0;
+
+  if (!hasFilteredProducts) {
+    return <div>No products found</div>;
+  }
 
   return (
     <table>

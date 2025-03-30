@@ -1,7 +1,7 @@
-import { Product } from "../types/Product";
-import { SearchBar } from "./SearchBar";
-import { ProductTable } from "./ProductTable";
 import { useState } from "react";
+import { Product } from "../types/Product";
+import { ProductTable } from "./ProductTable";
+import { SearchBar } from "./SearchBar";
 
 interface FilterableProductTableProps {
   products: Product[];
@@ -12,7 +12,7 @@ export function FilterableProductTable({
 }: FilterableProductTableProps) {
   const [filterText, setFilterText] = useState("");
   const [inStockOnly, setInStockOnly] = useState(false);
-  const [somthingText, setSomthingText] = useState("");
+  const [somethingText, setSomethingText] = useState("");
 
   return (
     <div>
@@ -23,8 +23,8 @@ export function FilterableProductTable({
         onInStockOnlyChange={setInStockOnly}
       />
       <input
-        value={somthingText}
-        onChange={(e) => setSomthingText(e.target.value)}
+        value={somethingText}
+        onChange={(e) => setSomethingText(e.target.value)}
         placeholder="say something!"
       ></input>
       <ProductTable

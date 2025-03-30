@@ -1,4 +1,5 @@
 import { Product } from "../types/Product";
+import { formatCurrency } from "../utils/formatters";
 
 interface ProductRowProps {
   product: Product;
@@ -14,7 +15,7 @@ export function ProductRow({ product }: ProductRowProps) {
   return (
     <tr>
       <td>{name}</td>
-      <td>{product.price}</td>
+      <td>{formatCurrency(product.price)}</td>
     </tr>
   );
 }

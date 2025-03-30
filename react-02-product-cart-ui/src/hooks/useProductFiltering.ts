@@ -1,3 +1,4 @@
+import { useMemo } from "react";
 import { Product } from "../types/Product";
 
 export function useProductFiltering(
@@ -5,21 +6,26 @@ export function useProductFiltering(
   filterText: string,
   inStockOnly: boolean
 ) {
-  const filteredProducts = products.filter(
-    (product) =>
-      product.name.toLowerCase().includes(filterText.toLowerCase()) &&
-      (!inStockOnly || product.stocked)
+  const filteredProducts = useMemo(
+    () =>
+      products.filter(
+        (product) =>
+          product.name.toLowerCase().includes(filterText.toLowerCase()) &&
+          (!inStockOnly || product.stocked)
+      ),
+    [products, filterText, inStockOnly]
   );
 
-  const productsByCategory = filteredProducts.reduce<Record<string, Product[]>>(
-    (acc, product) => {
-      if (!acc[product.category]) {
-        acc[product.category] = [];
-      }
-      acc[product.category].push(product);
-      return acc;
-    },
-    {}
+  const productsByCategory = useMemo(
+    () =>
+      filteredProducts.reduce<Record<string, Product[]>>((acc, product) => {
+        if (!acc[product.category]) {
+          acc[product.category] = [];
+        }
+        acc[product.category].push(product);
+        return acc;
+      }, {}),
+    [filteredProducts]
   );
 
   return {
