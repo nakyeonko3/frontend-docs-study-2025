@@ -1,26 +1,10 @@
 import Avatar from "./Avatar";
 import Repository from "./Repository";
+import { useGitHubProfile } from "./useGithubProfile";
 
-interface ProfileProps {
-  username: string;
-  bio: string;
-  followers: number;
-  following: number;
-  repositories: Array<{
-    name: string;
-    description: string;
-    stars: number;
-    language?: string;
-  }>;
-}
+export default function Profile() {
+  const { userData, repositories } = useGitHubProfile("nakyeonko3");
 
-export default function Profile({
-  username,
-  bio,
-  followers,
-  following,
-  repositories,
-}: ProfileProps) {
   return (
     <div
       style={{
@@ -31,20 +15,19 @@ export default function Profile({
       }}
     >
       <div style={{ display: "flex", gap: "20px", marginBottom: "20px" }}>
-        <Avatar username={username} />
+        <Avatar username={userData.username} />
         <div>
-          <h1>{username}</h1>
-          <h2 style={{ color: "#666" }}>@{username}</h2>
-          {bio && <p>{bio}</p>}
+          <h1>{userData.username}</h1>
+          <h2 style={{ color: "#666" }}>@{userData.username}</h2>
+          {userData.bio && <p>{userData.bio}</p>}
 
           <div style={{ display: "flex", gap: "15px" }}>
-            <span>👥 {followers} followers</span>
-            <span>👤 {following} following</span>
+            <span>👥 {userData.followers} followers</span>
+            <span>👤 {userData.following} following</span>
           </div>
         </div>
       </div>
-
-      <h2>Pinned Repositories</h2>
+      <h2>Repositories</h2>
       {repositories.map((repo) => (
         <Repository key={repo.name} {...repo} />
       ))}
