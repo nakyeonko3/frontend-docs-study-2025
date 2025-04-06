@@ -1,6 +1,6 @@
 import axios from "axios";
 
-interface UserData {
+export interface UserData {
   name: string;
   username: string;
   bio: string;
