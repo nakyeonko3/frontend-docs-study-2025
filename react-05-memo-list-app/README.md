@@ -19,4 +19,24 @@
 
 # 리스트 렌더링
 
+## 배열을 데이터로 렌더링하기 
+- map과 filter 사용하기
+-  고유하게 식별할 수 있는 문자열 또는 숫자를 key로 지정하기
+- map() 호출 내부의 JSX 엘리먼트에는 항상 key가 필요하다
 
+
+- list 요소에 key값이 없는 경우 아래와 같은 경고가 표시된다.
+```
+Each child in a list should have a unique "key" prop.
+
+Check the render method of `List`. See https://react.dev/link/warning-keys for more information. Stack: 
+```
+
+## key를 가져오는 곳
+- 데이터베이스의 데이터에 사용되는 ID 값을 사용하기.
+  - key/ID 값을 사용하기
+  - 컴포넌트명과 같이 사용하기 `컴포넌트명-{ID}` 
+- 로컬에서 생성된 데이터라면 `crypto.randomUUID()` 또는 `uuid` 사용하기
+
+## key규칙
+- 같은 배열(같은 형제 컴포넌트) 상에서는 key값을 사용한다
