@@ -1,54 +1,22 @@
-# React + TypeScript + Vite
+# 조건부 렌더링
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+- null은 JSX 상에서 렌더링 되지 않는다.
+- 삼항 연산자로 조건부 렌더링하기
+- &&를 왼쪽에 숫자를 두면 안된다.
+  - 왼쪽 숫자가 0일 때 0이 화면에 렌더링 된다.
 
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+```
+ <li>의 두 가지 다른 “인스턴스”를 만들 수 있기 때문에 객체 지향 프로그래밍에서는 위의 두 예가 미묘하게 다르다고 생각할 수 있습니다. 그러나 JSX 엘리먼트는 내부 상태를 보유하지 않으며 실제 DOM 노드가 아니기 때문에 “인스턴스”가 아닙니다. 이것은 청사진처럼 간단한 설명입니다. 따라서 위의 두 가지 예시 코드는 실제로 완전히 동일합니다. 상태를 보존하고 초기화하기에서는 이 기능이 어떻게 작동하는지 자세히 설명합니다.
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## 자바스크립트 조건문 유의해야 될 점
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+- JavaScript에서 falsy로 취급되는 값들
+  - `0, '', null, undefined, false` 
+- truthy로 취급되는 값들
+  - `{}, [], -1, '가', '0', true`
+- `&&`는 falsy, `||`는 truthy가 되는 값을 리턴한다.
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
-```
+# 리스트 렌더링
+
+
