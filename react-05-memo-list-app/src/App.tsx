@@ -1,3 +1,6 @@
+import Profile from "./Profile";
+import Timer from "./Timer";
+
 const people = [
   "Creola Katherine Johnson: mathematician",
   "Mario José Molina-Pasquel Henríquez: chemist",
@@ -35,8 +38,21 @@ function PackingList() {
 function App() {
   return (
     <>
-      {/* <PackingList /> */}
+      <PackingList />
+      <Timer />
       <List />
+      <Profile
+        person={{
+          name: "koko",
+          avatarUrl: "https://i.imgur.com/lrWQx8ls.jpg",
+        }}
+      />
+      <Profile
+        person={{
+          name: "KiKi",
+          avatarUrl: "https://i.imgur.com/MK3eW3As.jpg",
+        }}
+      />
     </>
   );
 }
