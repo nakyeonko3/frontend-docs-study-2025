@@ -10,7 +10,9 @@ const people = [
 ];
 
 function List() {
-  const listItems = people.map((person) => <li>{person}</li>);
+  const listItems = people.map((person, index) => (
+    <li key={index}>{person}</li>
+  ));
   return <ul>{listItems}</ul>;
 }
 
