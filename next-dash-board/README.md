@@ -165,3 +165,20 @@ app/
     - 메뉴바, 제품 정보 같은 **정적인 부분**이 먼저 렌더링 되도록함.
   2. 정적 라우트 쉘(static route shell)에 동적인 콘텐츠들은 빈 공간(구멍)으로 남겨둠
   3. 이 빈 공간(구멍)들은 병렬로 스트리밍 되어 전체 페이지의 로드 시간이 단축됨.
+
+
+# chap 14: Improving Accessibility
+
+## What is accessibility?
+- 접근성(accessibility)은 장애가 있는 사용자를 포함해 모든 사람이 웹 애플리케이션을 사용할 수 있도록 설계하고 구현하는 것을 말한다.
+- 웹 접근성은 특정 누군가를 위한 것이 아니라 해당 웹서비스를 사용하는 모든 사람을 위한 것임.
+
+## chap 15: Adding Authentication
+
+### Authentication vs. Authorization
+- 인증(Authentication)
+  - 사용자의 신원을 확인하는 절차
+  - 사용자 자신이 누구인지를 확인하는 절차이다.
+- 인가(Authorization)
+  - 사용자가 어떤 데이터나 기능에 접근할 수 있는지 결정하는 절차
+  - ex) 사내 시스템에 로그인한 직원이 모든 문서에 접근할 수 있는 것은 아니며, 부서나 직급에 따라 접근 가능한 자원이 다름.
