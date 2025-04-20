@@ -1,5 +1,1 @@
-{
-  "dependencies": {
-    "byul": "^2.0.7"
-  }
-}
+{"dependencies":{"next-auth":"5.0.0-beta.25"}}
