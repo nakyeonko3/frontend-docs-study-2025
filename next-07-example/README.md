@@ -82,6 +82,8 @@ export default function Expandable({children}) {
 ## Async components with Server Components
 - 서버 컴포넌트를 이용한 비동기 컴포넌트
 - 서버 컴포넌트는 async 키워드를 붙여서 컴포넌트를 작성 할 수 있다.
+- Suspense는 자식 컴포넌트가 준비될 때까지 렌더링을 일시 중단한다.
+- Promise가 해결(resolve)되면 Suspense는 원래 컴포넌트 렌더링을 재개한다.
 - async 컴포넌트에서는 await를 사용하면 해당 Promise가 완료 상태(fulfilled, rejected )가 될 때까지 렌더링을 멈춘다.
 	- fullfilled 가 되면 렌더링을 재개한다.
 	- rejected 가 되면 에러를 던진다(throw), 그러면 ErrorBoundary 에러 처리 컴포넌트에서 잡히거나 기본 fallback으로 처리 된다.
@@ -156,7 +158,27 @@ export function Button() {
 
 # `<Suspense>`
 - `<Suspense>` 를 사용하면 자식 컴포넌트들이 로딩을 완료할 때까지 fallback에 정의한 대체 UI를 표시 할 수 있다.
-- async 컴포넌트에서는 await를 사용하면 해당 Promise가 완료 상태(fulfilled, rejected )가 될 때까지 렌더링을 멈춘다.
-	- fullfilled 가 되면 렌더링을 재개한다.
-	- rejected 가 되면 에러를 던진다(throw), 그러면 ErrorBoundary 에러 처리 컴포넌트에서 잡히거나 기본 fallback으로 처리 된다.
-	- 이를 이용해서 Suspense를 통한 점진적 로딩(streaming)도 가능해짐.
+- Suspense는 자식 컴포넌트가 준비될 때까지 렌더링을 일시 중단한다.
+- Promise가 해결(resolve)되면 Suspense는 원래 컴포넌트 렌더링을 재개한다.
+- async 컴포넌트에서는 await를 사용하면 해당 Promise가 완료 상태(fulfilled, rejected)가 될 때까지 렌더링을 멈춘다.
+    - fulfilled가 되면 렌더링을 재개한다.
+    - rejected가 되면 에러를 던진다(throw), 그러면 ErrorBoundary 에러 처리 컴포넌트에서 잡히거나 기본 fallback으로 처리 된다.
+    - 이를 이용해서 Suspense를 통한 점진적 로딩(streaming)도 가능해짐.
+
+```jsx
+import { Suspense } from 'react';
+
+function DataComponent() {
+    // 이 컴포넌트가 데이터를 불러오는 동안 Promise를 throw
+    const data = fetchData(); // 가정: 이 함수는 Promise를 throw할 수 있음
+    return <div>{data}</div>;
+}
+
+export default function App() {
+    return (
+        <Suspense fallback={<div>Loading...</div>}>
+            <DataComponent />
+        </Suspense>
+    );
+}
+```
