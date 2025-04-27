@@ -1,13 +1,15 @@
 import "./App.css";
-import Counter from "./Couter";
+import AutomaticBatching from "./statequeue/AutomaticBatching";
 import ProcessQueue from "./statequeue/ProcessQueue";
 
 function App() {
   return (
     <>
-      <div></div>
-      <Counter />
-      <ProcessQueue />
+      <div className="app-container">
+        <AutomaticBatching />
+        <hr />
+        <ProcessQueue />
+      </div>
     </>
   );
 }
