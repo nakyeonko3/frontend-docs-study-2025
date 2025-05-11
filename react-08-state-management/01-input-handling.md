@@ -31,7 +31,7 @@
 	- ex) 폼에 대한 상태 값은 다음과 같을 수 있다. Error(에러), Submitting(폼 제출), Typing(작성중)
 - 유한 상태 기계(Finite-state machine, FSM)
 	- 유한 상태 기계는 어떠한 사건(Event)에 의해 한 상태에서 다른 상태로 변화할 수 있으며, 이를 전이(Transition)이라 한다 
-	- 아래 그림에서는 광부의 상태를 순서도로 표현한 그림이다. 여기서 광부가 특정 사건(Event)마다 다른 상태로 전이(Transition)되는 걸 볼 수 있다.
+	- 아래 그림에서는 광부의 상태를 순서도로 표현한 그림이다. 여기서 광부가 특정 사건(Event)마다 다른 상태로 전이(Transition)되는 걸 볼 수 있다.</br>
 ![|300](https://i.imgur.com/YSMX0bI.png)
 
 
