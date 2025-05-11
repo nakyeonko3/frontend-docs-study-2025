@@ -30,22 +30,36 @@ export default function Form() {
   }
 
   return (
-    <>
-      <label>
-        Name:
-        <input value={person.name} onChange={handleChangeName} />
-      </label>
+    <form style={{ display: "flex", flexDirection: "column" }}>
+      <div>
+        <label>
+          Name:
+          <input value={person.name} onChange={handleChangeName} />
+        </label>
+      </div>
       <label>
         Title:
-        <input value={person.artwork.title} onChange={handleChange} />
+        <input
+          name="title"
+          value={person.artwork.title}
+          onChange={handleChange}
+        />
       </label>
       <label>
         City:
-        <input value={person.artwork.city} onChange={handleChange} />
+        <input
+          name="city"
+          value={person.artwork.city}
+          onChange={handleChange}
+        />
       </label>
       <label>
         Image:
-        <input value={person.artwork.image} onChange={handleChange} />
+        <input
+          name="image"
+          value={person.artwork.image}
+          onChange={handleChange}
+        />
       </label>
       <p>
         <i>{person.artwork.title}</i>
@@ -55,6 +69,6 @@ export default function Form() {
         (located in {person.artwork.city})
       </p>
       <img src={person.artwork.image} alt={person.artwork.title} />
-    </>
+    </form>
   );
 }

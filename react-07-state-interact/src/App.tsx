@@ -1,14 +1,17 @@
 import "./App.css";
-import AutomaticBatching from "./statequeue/AutomaticBatching";
-import ProcessQueue from "./statequeue/ProcessQueue";
+import Form from "./Form";
+// import AutomaticBatching from "./statequeue/AutomaticBatching";
+// import ProcessQueue from "./statequeue/ProcessQueue";
 
 function App() {
   return (
     <>
       <div className="app-container">
-        <AutomaticBatching />
+        {/* <AutomaticBatching /> */}
         <hr />
-        <ProcessQueue />
+        {/* <ProcessQueue /> */}
+        <hr />
+        <Form />
       </div>
     </>
   );
