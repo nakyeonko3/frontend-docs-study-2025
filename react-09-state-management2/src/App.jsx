@@ -1,10 +1,10 @@
-import "./App.css";
-import TaskApp from "./TaskApp";
+import Page from "./context/Page";
 
 function App() {
   return (
     <>
-      <TaskApp />
+      {/* <TaskApp /> */}
+      <Page />
     </>
   );
 }
