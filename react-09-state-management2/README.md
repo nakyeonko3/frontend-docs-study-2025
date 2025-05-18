@@ -4,6 +4,7 @@
 - React는 컴포넌트가 아니라 UI 렌더 트리를 기준으로 state 값을 보존한다.
 - React는 같은 렌더 트리 UI를 유지하면 state 값도 유지 된다.
 
+
 ## 같은 위치에서 state를 초기화하기
 컴포넌트가 같은 위치를 유지 하면서 state를 초기화 하고 싶다면 두 가지 방안이 있다.
 
@@ -13,6 +14,195 @@
 
 ### 컴포넌트에 key값을 사용하여 state값을 초기화하기
 - React는 key값이 변경되면 완전히 새로운 컴포넌트로 인식한다. 이를 이용해서 state 값을 초기화 한다. 
+
+
+## 첼린지
+
+### 챌린지 1 of 5:입력 문자열이 사라지는 것 고치기 
+- `showHint`의 값에 따라서 렌더링 되는 UI가 달라지기 때문에, `Form` 컴포넌트의 렌더 트리 상 위치가 바껴서 state가 초기화 된다.
+- 아래 코드처럼 수정하면 `showHint`의 값에 따라서 렌더링 되는 UI가 달라지지 않는다.
+```jsx
+export default function App() {
+  const [showHint, setShowHint] = useState(false);
+
+  return (
+    <div>
+      {showHint && (
+        <p>
+          <i>Hint: Your favorite city?</i>
+        </p>
+      )}
+      <Form />
+      <button
+        onClick={() => {
+          setShowHint(true);
+        }}
+      >
+        Show hint
+      </button>
+    </div>
+  );
+}
+```
+
+### 챌린지 2 of 5:두 필드를 맞바꾸기 
+- `key` 값을 지정하게 되면 해당 컴포넌트의 위치가 바뀌어도 state가 초기화 되지 않는다.
+```jsx
+function Checkbox({ checked, onChange }) {
+  return (
+    <label>
+      <input
+        type="checkbox"
+        checked={checked}
+        onChange={(e) => onChange(e.target.checked)}
+      />
+      Reverse order
+    </label>
+  );
+}
+
+export default function App() {
+  const [reverse, setReverse] = useState(false);
+    return (
+      <>
+      {reverse ? (
+        <>
+          <Field key="firstName" label="First name" />
+          <Field key="lastName" label="Last name" />
+          <Checkbox checked={reverse} onChange={setReverse} />
+        </>
+      ) : (
+        <>
+          <Field key="lastName" label="Last name" />
+          <Field key="firstName" label="First name" />
+          <Checkbox checked={reverse} onChange={setReverse} />
+        </>
+      )}
+      </>
+    );
+  }
+```
+
+### 챌린지 3 of 5: 폼 세부내용 초기화하기
+- `EditContact` 컴포넌트에 key값을 지정하게 되면 key값이 바뀔 때마다 이전 form 값이 초기화 된다.
+```jsx
+export default function ContactManager() {
+  const [
+    contacts,
+    setContacts
+  ] = useState(initialContacts);
+  const [
+    selectedId,
+    setSelectedId
+  ] = useState(0);
+  const selectedContact = contacts.find(c =>
+    c.id === selectedId
+  );
+
+  function handleSave(updatedData) {
+    const nextContacts = contacts.map(c => {
+      if (c.id === updatedData.id) {
+        return updatedData;
+      } else {
+        return c;
+      }
+    });
+    setContacts(nextContacts);
+  }
+
+  return (
+    <div>
+      <ContactList
+        contacts={contacts}
+        selectedId={selectedId}
+        onSelect={id => setSelectedId(id)}
+      />
+      <hr />
+      <EditContact
+        key={selectedId}
+        initialData={selectedContact}
+        onSave={handleSave}
+      />
+    </div>
+  )
+}
+```
+### 챌린지 4 of 5:이미지가 로딩될 동안 이미지가 안 보이게 하기
+- `key` 값을 지정하면 이전 이미지 컴포넌트가 즉시 제거되고 새로운 이미지 컴포넌트가 렌더링 된다.
+
+```jsx
+export default function Gallery() {
+  const [index, setIndex] = useState(0);
+  const hasNext = index < images.length - 1;
+
+  function handleClick() {
+    if (hasNext) {
+      setIndex(index + 1);
+    } else {
+      setIndex(0);
+    }
+  }
+
+  let image = images[index];
+  return (
+    <>
+      <button onClick={handleClick}>
+        Next
+      </button>
+      <h3>
+        Image {index + 1} of {images.length}
+      </h3>
+      <img key={`${index}-${image.src}`} src={image.src} />
+      <p>
+        {image.place}
+      </p>
+    </>
+  );
+}
+```
+
+### 챌린지 5 of 5:배열에서 잘못 지정된 state 고치기
+- li의 key값이 i로 지정되어 있기 때문에, 배열의 순서가 바뀌어도 key값이 바뀌지 않기 때문에 state가 초기화 되지 않는다.
+- 아래 코드처럼 id값을 key값으로 지정하게 되면 state가 초기화 된다.
+
+```jsx
+export default function ContactList() {
+  const [reverse, setReverse] = useState(false);
+
+  const displayedContacts = [...contacts];
+  if (reverse) {
+    displayedContacts.reverse();
+  }
+
+  return (
+    <>
+      <label>
+        <input
+          type="checkbox"
+          value={reverse}
+          onChange={e => {
+            setReverse(e.target.checked)
+          }}
+        />{' '}
+        Show in reverse order
+      </label>
+      <ul>
+        {displayedContacts.map((contact, i) =>
+          <li key={`${i}-${contact.id}`}>
+            <Contact contact={contact} />
+          </li>
+        )}
+      </ul>
+    </>
+  );
+}
+
+const contacts = [
+  { id: 0, name: 'Alice', email: 'alice@mail.com' },
+  { id: 1, name: 'Bob', email: 'bob@mail.com' },
+  { id: 2, name: 'Taylor', email: 'taylor@mail.com' }
+];
+```
 
 
 ---
@@ -178,3 +368,8 @@ export default function FlyoutMenu() {
 
 
 # Reducer와 Context로 앱 확장하기
+
+## Reducer와 context를 결합하기
+
+- 다른 컴포넌트에서 사용하려면 props로 전달하고 prop drilling이 발생한다.
+- 이를 해결하기 위해 context API를 사용하여 prop이 아니라 context로 전달한다.
