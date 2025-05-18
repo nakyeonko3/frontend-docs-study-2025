@@ -213,6 +213,12 @@ const contacts = [
 
 
 ---
+
+
+
+
+
+
 # state 로직을 reducer로 작성하기
 
 ## reducer를 사용하여 state 로직을 통합하기
@@ -374,6 +380,38 @@ export default function FlyoutMenu() {
 ```
 
 ## 첼린지
+
+
+### 첼린지 1 of 4
+
+```jsx
+export default function ContactList({ contacts, selectedId, dispatch }) {
+  function handleSelect(contactId) {
+    dispatch({
+      type: 'changed_selection',
+      contactId
+    });
+  }
+
+  return (
+    <section className="contact-list">
+      <ul>
+        {contacts.map(contact =>
+          <li key={contact.id}>
+            <button onClick={() => handleSelect(contact.id)}>
+              {selectedId === contact.id ? (
+                <b>{contact.name}</b>
+              ) : (
+                contact.name
+              )}
+            </button>
+          </li>
+        )}
+      </ul>
+    </section>
+  );
+}
+```
 
 ## 챌린지 2 of 4:message 전송 시, input 입력 값 지우기
 ```jsx
