@@ -16,6 +16,13 @@
 - React는 key값이 변경되면 완전히 새로운 컴포넌트로 인식한다. 이를 이용해서 state 값을 초기화 한다. 
 
 
+## 요약
+- React에서 state는 UI 렌더 트리를 기준으로 저장이 된다.
+- 컴포넌트가 렌더 트리에서 같은 위치를 유지하면 state도 보존이 된다.
+- 컴포넌트가 제거가 될 때 해당 노드를 React가 제거하면서 state도 마찬가지로 제거 된다. 
+- key값이 변경되면 React는 해당 노드를 새로운 노드로 인식하여 state가 초기화 된다.
+
+
 ## 첼린지
 
 ### 챌린지 1 of 5:입력 문자열이 사라지는 것 고치기 
@@ -366,6 +373,42 @@ export default function FlyoutMenu() {
 }
 ```
 
+## 첼린지
+
+## 챌린지 2 of 4:message 전송 시, input 입력 값 지우기
+```jsx
+export default function Chat({
+  contact,
+  message,
+  dispatch
+}) {
+  const onSend = e => {
+    alert(`Sending "${message}" to ${contact.email}`);
+    dispatch({
+      type: 'edited_message',
+      message: e.target.value
+    });
+  };
+  return (
+    <section className="chat">
+      <textarea
+        value={message}
+        placeholder={'Chat to ' + contact.name}
+        onChange={e => {
+          dispatch({
+            type: 'edited_message',
+            message: e.target.value
+          });
+        }}
+      />
+      <br />
+      <button onClick={onSend}>Send to {contact.email}</button>
+    </section>
+  );
+}
+```
+
+
 
 # Reducer와 Context로 앱 확장하기
 
@@ -373,3 +416,46 @@ export default function FlyoutMenu() {
 
 - 다른 컴포넌트에서 사용하려면 props로 전달하고 prop drilling이 발생한다.
 - 이를 해결하기 위해 context API를 사용하여 prop이 아니라 context로 전달한다.
+
+
+## Reducer와 context를 결합하는 방법
+
+### 1. Context를 생성합니다.
+- 상태를 위한 컨텍스트와 디스패치 함수를 위한 컨텍스트를 각각 생성
+```jsx
+import { createContext } from 'react';
+
+export const TasksContext = createContext(null);
+export const TasksDispatchContext = createContext(null);
+```
+
+### 2. State와 dispatch 함수를 context에 넣습니다.
+- useReducer를 사용해 상태와 디스패치 함수를 가져오기.
+
+```jsx
+const [tasks, dispatch] = useReducer(tasksReducer, initialTasks);
+return (
+  <TasksContext.Provider value={tasks}>
+    <TasksDispatchContext.Provider value={dispatch}>
+      {/* ... 하위 컴포넌트들 ... */}
+    </TasksDispatchContext.Provider>
+  </TasksContext.Provider>
+);
+```
+### 3. 트리 안에서 context를 사용합니다.
+- 상태나 디스패치 함수가 필요한 하위 컴포넌트에서 useContext 훅을 사용하여 부모 컨텍스트의 값을 직접 가져오기.
+
+```jsx
+export default function TaskList() {
+  const tasks = useContext(TasksContext);
+  return (
+    <ul>
+      {tasks.map(task => (
+        <li key={task.id}>
+          <Task task={task} />
+        </li>
+      ))}
+    </ul>
+  );
+}
+```
