@@ -23,6 +23,18 @@
 - key값이 변경되면 React는 해당 노드를 새로운 노드로 인식하여 state가 초기화 된다.
 
 
+```mermaid
+graph TD
+  A[div (App root)]
+  A --> B[div (Counter)]
+  B --> C[h1 (score)]
+  B --> D[button (Add one)]
+  A --> E[label]
+  E --> F[input type=checkbox]
+  E --> G[text: "Use fancy styling"]
+
+```
+
 ## 첼린지
 
 ### 챌린지 1 of 5:입력 문자열이 사라지는 것 고치기 
